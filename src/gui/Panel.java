@@ -1,6 +1,7 @@
 package gui;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -9,10 +10,11 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import shape.Shape;
-import shape.Shape.shapes;
 
 @SuppressWarnings("serial")
 public class Panel extends JPanel {
+	ImageIcon rectIcon = new ImageIcon("rect.jpg");
+	ImageIcon sqIcon = new ImageIcon("square.jpg");
 	public Panel(final DrawPad padDraw) {
 		makeColorButton(Color.BLUE, padDraw);
 		makeColorButton(Color.MAGENTA, padDraw);
@@ -26,23 +28,25 @@ public class Panel extends JPanel {
 		makeColorButton(Color.PINK, padDraw);
 		makeColorButton(Color.CYAN, padDraw);
 		makeColorButton(Color.DARK_GRAY, padDraw);
+		makeShapeButton(rectIcon, padDraw, "Rectangle");
+		makeShapeButton(sqIcon, padDraw, "Square");
 		JButton clearButton = new JButton("Clear");
 		clearButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				padDraw.clear();
+				padDraw.clearAll();
 			}
 		});
 		this.add(clearButton);
 	}
 	
-	public void makeShapeButton(ImageIcon icon, DrawPad padDraw, Shape shape){
+	public void makeShapeButton(ImageIcon icon, final DrawPad padDraw, final String st){
 		JButton shapeButton = new JButton(icon);
 		this.add(shapeButton);
 		shapeButton.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-
+				padDraw.currShape = st;
 			}
 		});
 	}
