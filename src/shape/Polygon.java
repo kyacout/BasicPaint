@@ -6,19 +6,26 @@ import java.util.Arrays;
 import java.util.InputMismatchException;
 
 public class Polygon extends Shape {
-	protected int[] Xs = new int[3];
-	protected int[] Ys = new int[3];
+	protected int[] Xs;
+	protected int[] Ys;
 	protected int n;
 	
-	public Polygon(Color color, int[] Xs, int[] Ys) {
+	public Polygon(int[] Xs, int[] Ys) {
 		if (Xs.length != Ys.length)
 			throw new InputMismatchException();
 		
 		n = Xs.length;
-		this.color = color;
+		this.Xs = Xs;
+		this.Ys = Ys;
+		
 		Arrays.sort(Xs);
 		Arrays.sort(Ys);
 		boundRect = new Rectangle(new Point(Xs[0], Ys[0]), Xs[2] - Xs[0], Ys[2] - Ys[0]);
+	}
+	
+	public Polygon(Color color, int[] Xs, int[] Ys) {
+		this(Xs, Ys);
+		this.color = color;
 	}
 	
 	@Override

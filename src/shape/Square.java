@@ -1,13 +1,14 @@
 package shape;
 
 import java.awt.Color;
+import java.util.InputMismatchException;
 
 public class Square extends Rectangle implements Cloneable {
-	public Square(Point position, Color color, int length) {
-		this.position = position;
-		this.color = color;
-		this.width = length;
-		this.height = length;
+	public Square(Color color, int[] Xs, int[] Ys) {
+		super(color, Xs, Ys);
+		
+		if (width != height)
+			throw new InputMismatchException();
 	}
 	
 	@Override

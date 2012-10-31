@@ -2,26 +2,34 @@ package shape;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.util.InputMismatchException;
 
-public class Rectangle extends Shape implements Cloneable {
+public class Rectangle extends Polygon implements Cloneable {
 	protected int width;
 	protected int height;
 	protected Point position;
 	
 	
-	public Rectangle() { }
-	
 	public Rectangle(Point position, int width, int height) {
-		this.position = position;
-		this.width = width;
-		this.height = height;
+		super(new int[]{position.getX(), position.getX(), position.getX() + width, position.getX() + width},
+				new int[]{position.getY(), position.getY(), position.getY() + height, position.getY() + height});
+		
+		position = new Point(Xs[0], Ys[0]);
+		
+		width = Xs[3] - Xs[0];
+		height = Ys[3] - Ys[0];
 	}
 	
-	public Rectangle(Point position, Color color, int width, int height) {
-		this.color = color;
-		this.position = position;
-		this.width = width;
-		this.height = height;
+	public Rectangle(Color color, int[] Xs, int[] Ys) {
+		super(color, Xs, Ys);
+		if ((n != 4) || (Xs[0] != Xs[1]) || (Xs[2] != Xs[3]) || 
+				(Ys[0] != Ys[1]) || (Ys[2] != Ys[3]))
+			throw new InputMismatchException();
+		
+		position = new Point(Xs[0], Ys[0]);
+		
+		width = Xs[3] - Xs[0];
+		height = Ys[3] - Ys[0];
 	}
 	
 	public Point getPos() {
@@ -36,7 +44,6 @@ public class Rectangle extends Shape implements Cloneable {
 	
 	@Override
 	protected Object clone() throws CloneNotSupportedException {
-		Rectangle t = new Rectangle(new Point(position.getX(), position.getY()), color, width, height);
-		return t;
+		return super.clone();
 	}
 }
