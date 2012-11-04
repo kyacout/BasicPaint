@@ -17,7 +17,7 @@ public class Ellipse extends Shape implements Cloneable {
 	}
 	
 	@Override
-	public void Draw(Graphics2D graphics2D) {
+	public void draw(Graphics2D graphics2D) {
 		setDrawingColor(graphics2D);
 		graphics2D.drawOval(getBoundRect().getPos().getX(), getBoundRect().getPos().getY(), getWidth(), getHeight());
 	}

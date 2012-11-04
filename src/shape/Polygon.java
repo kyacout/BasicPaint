@@ -26,7 +26,7 @@ public class Polygon extends Shape implements Cloneable {
 	}
 	
 	@Override
-	public void Draw(Graphics2D g) {
+	public void draw(Graphics2D g) {
 		setDrawingColor(g);
 		g.drawPolygon(Xs, Ys, getNumberOfPoints());
 	}

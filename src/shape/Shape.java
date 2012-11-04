@@ -52,7 +52,16 @@ public abstract class Shape implements Cloneable {
 		return new Point(boundRect.getPos());
 	}
 	
-	public abstract void Draw(Graphics2D g);
+	public boolean contains(int x, int y) {
+		if (getPosition().getX() > x || 
+				getPosition().getX() + getBoundRect().getWidth() < x || 
+				getPosition().getY() > y || 
+				getPosition().getY() + getBoundRect().getHeight() < y)
+			return false;
+		return true;
+	}
+	
+	public abstract void draw(Graphics2D g);
 	
 	protected void setDrawingColor(Graphics2D g) {
 		g.setColor(color);

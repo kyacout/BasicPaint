@@ -133,7 +133,7 @@ public class DrawPad extends JComponent {
 		clearCurr();
 		
 		for(Shape currShape : shapes){
-			currShape.Draw(graphics2D);
+			currShape.draw(graphics2D);
 		}
 		
 		repaint();
