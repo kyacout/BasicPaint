@@ -6,14 +6,10 @@ import java.util.InputMismatchException;
 
 public abstract class Shape implements Cloneable {
 	
-	private Rectangle boundRect;
+	private BoundRectangle boundRect;
 	private Color color;
 	
-	public Shape() {
-		color = null;
-	}
-	
-	public Shape(Color color, Rectangle boundRect) {
+	public Shape(Color color, BoundRectangle boundRect) {
 		setColor(color);
 		this.boundRect = boundRect;
 	}
@@ -36,7 +32,7 @@ public abstract class Shape implements Cloneable {
 			minY = Math.min(minY, Ys[i]);
 		}
 		
-		boundRect = new Rectangle(new Point(minX, maxX), maxX - minX, maxY - minY);
+		boundRect = new BoundRectangle(new Point(minX, maxX), maxX - minX, maxY - minY);
 		setColor(color);
 	}
 	
@@ -48,12 +44,12 @@ public abstract class Shape implements Cloneable {
 		return this.color;
 	}
 	
-	public Rectangle getBoundRect() {
+	public BoundRectangle getBoundRect() {
 		return boundRect;
 	}
 	
 	public Point getPosition() {
-		return new Point(boundRect.getPosition());
+		return new Point(boundRect.getPos());
 	}
 	
 	public abstract void Draw(Graphics2D g);

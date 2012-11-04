@@ -2,21 +2,10 @@ package shape;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
-import java.util.InputMismatchException;
 
 public class Polygon extends Shape implements Cloneable { 
 	private int[] Xs;
 	private int[] Ys;
-
-	
-	public Polygon(int[] Xs, int[] Ys) {
-		super();
-		if (Xs.length != Ys.length)
-			throw new InputMismatchException();
-		
-		this.Xs = Xs;
-		this.Ys = Ys;
-	}
 	
 	public Polygon(Color color, int[] Xs, int[] Ys) {
 		super(color, Xs, Ys);
