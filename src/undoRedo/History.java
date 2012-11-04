@@ -1,3 +1,4 @@
+package undoRedo;
 import java.util.Stack;
 
 import shape.Shape;
@@ -9,8 +10,8 @@ public class History {
 	
 	/**
 	 * 
-	 * @param prevState: A reference to the previous state of the object, if the object is new, this should be null.
-	 * @param currState: A reference to the current state of the object, if the object is deleted, this should be null.
+	 * @param prevState A reference to the previous state of the object, if the object is new, this should be null.
+	 * @param currState A reference to the current state of the object, if the object is deleted, this should be null.
 	 */
 	public static void addState(Shape prevState, Shape currState) {
 		undo.push(new State(prevState, currState));
