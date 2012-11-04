@@ -7,7 +7,7 @@ public class Triangle extends Polygon implements Cloneable {
 	public Triangle(Color color, int[] Xs, int[] Ys) {
 		super(color, Xs, Ys);
 		
-		if (n != 3)
+		if (getNumberOfPoints() != 3)
 			throw new InputMismatchException();
 	}
 	

@@ -7,11 +7,10 @@ import javax.swing.JFrame;
 
 @SuppressWarnings("serial")
 public class PaintWindow extends JFrame {
-	private Panel panel;
-	private DrawPad padDraw; 
-	public PaintWindow(){
-		padDraw = new DrawPad();
-		panel = new Panel(padDraw);
+
+	public PaintWindow() {
+		DrawPad padDraw = new DrawPad();
+		Panel panel = new Panel(padDraw);
 		setTitle("Basic Paint");
 		setSize(1300, 720);
 		panel.setPreferredSize(new Dimension(100, 150));
@@ -20,5 +19,4 @@ public class PaintWindow extends JFrame {
 		content.add(panel, BorderLayout.WEST);
 		content.add(padDraw, BorderLayout.CENTER);
 	}
-	
 }

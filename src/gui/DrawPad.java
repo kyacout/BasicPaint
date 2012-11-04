@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
-import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -24,7 +23,7 @@ public class DrawPad extends JComponent {
 	Color currColor;
 	LinkedList<Shape> shapes = new LinkedList<>();
 	String currShape;
-	int currentX, currentY, oldX, oldY, height, width,length;
+	int currentX, currentY, oldX, oldY, height, width, length;
 	
 	public DrawPad() {
 		setDoubleBuffered(false);

@@ -1,9 +1,6 @@
 package gui;
 import javax.swing.JFrame;
 
-
-
-
 public class PaintGUI {
 	public static void main(String[] args) {
 		PaintWindow frame = new PaintWindow();
