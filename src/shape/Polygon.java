@@ -32,6 +32,19 @@ public class Polygon extends Shape implements Cloneable {
 	}
 	
 	@Override
+	public void move(int x, int y) {
+		int dx = x - getPosition().getX();
+		int dy = y - getPosition().getY();
+		
+		for (int i = 0; i < getNumberOfPoints(); i++) {
+			Xs[i] += dx;
+			Ys[i] += dy;
+		}
+		
+		updateBoundRect(Xs, Ys);
+	}
+	
+	@Override
 	protected Object clone() throws CloneNotSupportedException {
 		int[] newXs = new int[getNumberOfPoints()];
 		int[] newYs = new int[getNumberOfPoints()];

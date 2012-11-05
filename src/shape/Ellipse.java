@@ -23,6 +23,11 @@ public class Ellipse extends Shape implements Cloneable {
 	}
 	
 	@Override
+	public void move(int x, int y) {
+		updateBoundRect(new Point(x, y), getWidth(), getHeight());
+	}
+	
+	@Override
 	protected Object clone() throws CloneNotSupportedException {
 		Ellipse e = new Ellipse(new Point(getBoundRect().getPos().getX(), getBoundRect().getPos().getY()), 
 				getColor(), getWidth(), getHeight());

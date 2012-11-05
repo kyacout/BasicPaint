@@ -9,6 +9,8 @@ public abstract class Shape implements Cloneable {
 	private BoundRectangle boundRect;
 	private Color color;
 	
+	private Class Circle;
+	
 	public Shape(Color color, BoundRectangle boundRect) {
 		setColor(color);
 		this.boundRect = boundRect;
@@ -18,6 +20,23 @@ public abstract class Shape implements Cloneable {
 		if (Xs.length != Ys.length)
 			throw new InputMismatchException();
 		
+		updateBoundRect(Xs, Ys);
+		setColor(color);
+	}
+	
+	public void setColor(Color color){
+		this.color = color;
+	}
+	
+	public Color getColor(){
+		return this.color;
+	}
+	
+	public BoundRectangle getBoundRect() {
+		return boundRect;
+	}
+	
+	protected void updateBoundRect(int[] Xs, int[] Ys) {
 		int minX, maxX, minY, maxY;
 		
 		minX = Integer.MAX_VALUE;
@@ -32,20 +51,11 @@ public abstract class Shape implements Cloneable {
 			minY = Math.min(minY, Ys[i]);
 		}
 		
-		boundRect = new BoundRectangle(new Point(minX, maxX), maxX - minX, maxY - minY);
-		setColor(color);
+		boundRect = new BoundRectangle(new Point(minX, minY), maxX - minX, maxY - minY);
 	}
 	
-	public void setColor(Color color){
-		this.color = color;
-	}
-	
-	public Color getColor(){
-		return this.color;
-	}
-	
-	public BoundRectangle getBoundRect() {
-		return boundRect;
+	protected void updateBoundRect(Point pos, int width, int height) {
+		boundRect = new BoundRectangle(pos, width, height);
 	}
 	
 	public Point getPosition() {
@@ -62,6 +72,8 @@ public abstract class Shape implements Cloneable {
 	}
 	
 	public abstract void draw(Graphics2D g);
+	
+	public abstract void move(int x, int y);
 	
 	protected void setDrawingColor(Graphics2D g) {
 		g.setColor(color);

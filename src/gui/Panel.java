@@ -7,20 +7,23 @@ import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
-import shape.Triangle;
+import shape.Shapes;
+import undoRedo.History;
+
 
 @SuppressWarnings("serial")
-public class Panel extends JPanel {
-	private ImageIcon rectIcon = new ImageIcon("rect.jpg");
-	private ImageIcon sqIcon = new ImageIcon("square.jpg");
-	private ImageIcon ellIcon = new ImageIcon("ellipse.jpg");
-	private ImageIcon circleIcon = new ImageIcon("circle.jpg");
-	private ImageIcon triangleIcon = new ImageIcon("triangle.jpg");
-	private ImageIcon lineIcon = new ImageIcon("line.jpg");
-	private ImageIcon pointerIcon = new ImageIcon("pointer.jpg");
-	
+public class Panel extends JPanel {	
 	public Panel(final DrawPad padDraw) {
+		ImageIcon rectIcon = new ImageIcon("rect.jpg");
+		ImageIcon sqIcon = new ImageIcon("square.jpg");
+		ImageIcon ellIcon = new ImageIcon("ellipse.jpg");
+		ImageIcon circleIcon = new ImageIcon("circle.jpg");
+		ImageIcon triangleIcon = new ImageIcon("triangle.jpg");
+		ImageIcon lineIcon = new ImageIcon("line.jpg");
+		ImageIcon pointerIcon = new ImageIcon("pointer.jpg");
+		
 		makeColorButton(Color.BLUE, padDraw);
 		makeColorButton(Color.MAGENTA, padDraw);
 		makeColorButton(Color.RED, padDraw);
@@ -33,15 +36,37 @@ public class Panel extends JPanel {
 		makeColorButton(Color.PINK, padDraw);
 		makeColorButton(Color.CYAN, padDraw);
 		makeColorButton(Color.DARK_GRAY, padDraw);
-		makeShapeButton(pointerIcon, padDraw, "Pointer");
-		makeShapeButton(rectIcon, padDraw, "Rectangle");
-		makeShapeButton(sqIcon, padDraw, "Square");
-		makeShapeButton(ellIcon, padDraw, "Ellipse");
-		makeShapeButton(circleIcon, padDraw, "Circle");
-		makeShapeButton(triangleIcon, padDraw, "Triangle");
-		makeShapeButton(lineIcon, padDraw, "Line");
+		makeShapeButton(pointerIcon, padDraw, Shapes.Pointer);
+		makeShapeButton(rectIcon, padDraw, Shapes.Rectangle);
+		makeShapeButton(sqIcon, padDraw, Shapes.Square);
+		makeShapeButton(ellIcon, padDraw, Shapes.Ellipse);
+		makeShapeButton(circleIcon, padDraw, Shapes.Circle);
+		makeShapeButton(triangleIcon, padDraw, Shapes.Triangle);
+		makeShapeButton(lineIcon, padDraw, Shapes.Line);
+		
+		JTextField classLocationTxt = new JTextField();
+		JButton loadButton = new JButton("load");
 		
 		JButton clearButton = new JButton("Clear");
+		
+		JButton undoButton = new JButton("Undo");
+		undoButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				padDraw.changeState(History.Undo());
+			}
+		});
+		
+		JButton redoButton = new JButton("Redo");
+		redoButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				padDraw.changeState(History.Redo());
+			}
+		});
+		
 		clearButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				padDraw.clearAll();
@@ -73,16 +98,20 @@ public class Panel extends JPanel {
 		this.add(moveButton);
 		this.add(deleteButton);
 		this.add(clearButton);
+		this.add(undoButton);
+		this.add(redoButton);
+		this.add(classLocationTxt);
+		this.add(loadButton);
 	}
 	
-	public void makeShapeButton(ImageIcon icon, final DrawPad padDraw, final String st) {
+	public void makeShapeButton(ImageIcon icon, final DrawPad padDraw, final Shapes st) {
 		JButton shapeButton = new JButton(icon);
 		this.add(shapeButton);
 		shapeButton.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				padDraw.currShape = st;
+				padDraw.setCurrShape(st);
 			}
 		});
 	}

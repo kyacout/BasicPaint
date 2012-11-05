@@ -15,7 +15,7 @@ public class History {
 	 */
 	public static void addState(Shape prevState, Shape currState) {
 		undo.push(new State(prevState, currState));
-		redo.empty();
+		redo.clear();
 	}
 	
 	/**
