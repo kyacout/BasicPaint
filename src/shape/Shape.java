@@ -9,8 +9,6 @@ public abstract class Shape implements Cloneable {
 	private BoundRectangle boundRect;
 	private Color color;
 	
-	private Class Circle;
-	
 	public Shape(Color color, BoundRectangle boundRect) {
 		setColor(color);
 		this.boundRect = boundRect;
@@ -77,5 +75,56 @@ public abstract class Shape implements Cloneable {
 	
 	protected void setDrawingColor(Graphics2D g) {
 		g.setColor(color);
+	}
+	
+	public static Shape createShape(Shapes shape, Point position, Color color, int width, int height) {
+		switch(shape) {
+			case Circle:
+				if (width != height)
+					throw new InputMismatchException();
+				return new Circle(position, color, width);
+			case Ellipse:
+				return new Ellipse(position, color, width, height);
+			default:
+				throw new InputMismatchException();
+		}
+	}
+	
+	public static Shape createShape(Shapes shape, Color color, int[] Xs, int[] Ys) {
+		switch (shape) {
+			case Line:
+				return new Line(color, Xs, Ys);
+			case Polygon:
+				return new Polygon(color, Xs, Ys);
+			case Rectangle:
+				return new Rectangle(color, Xs ,Ys);
+			case Square:
+				return new Square(color, Xs, Ys);
+			case Triangle:
+				return new Triangle(color, Xs, Ys);
+			default:
+				throw new InputMismatchException();
+		}
+	}
+	
+	public static ShapeType shapeType(Shapes shape) {
+		switch (shape) {
+			case Circle:
+				return ShapeType.Ellipse;
+			case Ellipse:
+				return ShapeType.Ellipse;
+			case Line:
+				return ShapeType.Polygon;
+			case Polygon:
+				return ShapeType.Polygon;
+			case Rectangle:
+				return ShapeType.Polygon;
+			case Square:
+				return ShapeType.Polygon;
+			case Triangle:
+				return ShapeType.Polygon;
+			default:
+				throw new InputMismatchException();
+		}
 	}
 }

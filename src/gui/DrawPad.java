@@ -141,57 +141,51 @@ public class DrawPad extends JComponent {
 	}
 
 	public void drawNewShape() {
-		switch (currShape) {
-		case Rectangle:
-			drawNewRectangle();
-			break;
-
-		case Square:
-			drawNewSquare();
-			break;
-
-		case Ellipse:
-			drawNewEllipse();
-			break;
-
-		case Circle:
-			drawNewCircle();
-			break;
-
-		default:
-			break;
+		Shape newShape = null;
+		
+		switch(Shape.shapeType(currShape)) {
+			case Ellipse:
+				newShape = Shape.createShape(currShape, new Point(left, top), currColor, Math.abs(width), Math.abs(height));
+				selectedShape = newShape;
+				break;
+			case Polygon:
+				newShape = Shape.createShape(currShape, currColor, Xs, Ys);
+				selectedShape = newShape;
+				break;
 		}
+		
 		if (currShape != Shapes.Triangle && currShape != Shapes.Line && currShape != Shapes.Pointer) {
+			selectedShape = newShape;
 			History.addState(null, selectedShape);
 			shapes.add(selectedShape);
 		}
 		drawAll();
 	}
 
-	public void drawNewRectangle() {
-		Shape rect = new Rectangle(currColor, new int[] { oldX,
-				oldX + width, oldX + width, oldX }, new int[] { oldY, oldY,
-				oldY + height, oldY + height });
-		selectedShape = rect;
-	}
-
-	public void drawNewSquare() {
-		Shape newSquare = new Square(currColor, new int[] { oldX,
-				oldX + width, oldX + width, oldX }, new int[] { oldY, oldY,
-				oldY + height, oldY + height });
-		selectedShape = newSquare;
-	}
-
-	public void drawNewEllipse() {
-		Shape newEllipse = new Ellipse(new Point(left, top), currColor,
-				Math.abs(width), Math.abs(height));
-		selectedShape = newEllipse;
-	}
-
-	public void drawNewCircle() {
-		Shape newCircle = new Circle(new Point(left, top), currColor, redius);
-		selectedShape = newCircle;
-	}
+//	public void drawNewRectangle() {
+//		Shape rect = new Rectangle(currColor, new int[] { oldX,
+//				oldX + width, oldX + width, oldX }, new int[] { oldY, oldY,
+//				oldY + height, oldY + height });
+//		selectedShape = rect;
+//	}
+//
+//	public void drawNewSquare() {
+//		Shape newSquare = new Square(currColor, new int[] { oldX,
+//				oldX + width, oldX + width, oldX }, new int[] { oldY, oldY,
+//				oldY + height, oldY + height });
+//		selectedShape = newSquare;
+//	}
+//
+//	public void drawNewEllipse() {
+//		Shape newEllipse = new Ellipse(new Point(left, top), currColor,
+//				Math.abs(width), Math.abs(height));
+//		selectedShape = newEllipse;
+//	}
+//
+//	public void drawNewCircle() {
+//		Shape newCircle = new Circle(new Point(left, top), currColor, redius);
+//		selectedShape = newCircle;
+//	}
 
 	public void drawNewTri() {
 		Shape newTriangle = new Triangle(currColor, Xs, Ys);
